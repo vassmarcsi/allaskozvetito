@@ -1,11 +1,7 @@
 <?php
 
 require_once 'config/init.php';
-
-if(!isset($_SESSION['userid'])){
-    header("Location: index.php");
-    die();
-}
+is_logged();
 
 print_html("html/header.html");
 print_html("html/navigacio.html");

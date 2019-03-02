@@ -12,4 +12,4 @@ if($conn -> connect_errno)
     die("Sikertelen csatlakozás!");
 }
 
-$conn ->set_charset("utf-8");
+$conn ->set_charset("utf8");

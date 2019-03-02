@@ -27,4 +27,31 @@ $(document).ready(function () {
             }
         })
     });
+
+    $("[name=feltolt]").click(function () {
+        //katid, munkaado, munkakor, hely, leiras, fizetes
+        let katid = $("[name=katid]").val();
+        let munkaado = $("[name=munkaado]").val();
+        let munkakor = $("[name=munkakor]").val();
+        let hely = $("[name=hely]").val();
+        let leiras = $("[name=leiras]").val();
+        let fizetes = $("[name=fizetes]").val();
+
+        $.ajax({
+            method: "POST",
+            url: "php/fel_tolt.php",
+            data: {
+                katid: katid,
+                munkaado: munkaado,
+                munkakor: munkakor,
+                hely: hely,
+                leiras: leiras,
+                fizetes: fizetes
+            },
+            success: function(valasz){
+                console.log("Sikeres feltöltés.");
+                console.log(valasz);
+            }
+        });
+    });//álláa feltöltés vége
 });
