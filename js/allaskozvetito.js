@@ -62,7 +62,7 @@ $(document).ready(function () {
     });
     
     $("[name=search]").click(function () {
-        console.log("Működik?");
+        //console.log("Működik?");
         let kulcsszo = $("#keyword").val();
         kulcsszo = kulcsszo.trim();
 
