@@ -1,9 +1,11 @@
 <?php
 
 require_once 'config/init.php';
-is_logged();
+if (!is_logged()){
+    header("Location: index.php");
+}
 
 print_html("html/header.html");
-print_html("html/navigacio.html");
+menu();
 print_html("html/feltolt.html");
 print_html("html/footer.html");

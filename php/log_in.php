@@ -22,10 +22,11 @@ if (($_SERVER['REQUEST_METHOD'] == "POST") && isset($_POST['email']) && isset($_
         $stmt->bind_result($id, $nev, $email, $jelszo);
         $stmt->fetch();
         $_SESSION['userid'] = $id;
-        echo 'Beléptél';
+        //echo 'Beléptél';
     } else {
         //helytelen felhasználónév vagy jelszó
         echo 'Helytelen felhasználónév vagy jelszó';
+        $_SESSION['login_error'] = "Helytelen felhasználónév vagy jelszó";
     }
     $stmt->close();
 }

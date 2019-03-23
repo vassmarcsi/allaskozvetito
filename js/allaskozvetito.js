@@ -16,9 +16,10 @@ $(document).ready(function () {
             },
             success: function (valasz) {
                 console.log(valasz);
-                $("#logouthref").attr('class', 'nav-link');
-                $("#upload").attr('class', 'nav-link');
-                $("#loginhref").attr('class', 'nav-link disabled d-none');
+                window.location = "index.php";
+                //$("#logouthref").attr('class', 'nav-link');
+                //$("#upload").attr('class', 'nav-link');
+                //$("#loginhref").attr('class', 'nav-link disabled d-none');
                 //$("#login").css('display', 'none');
                 //$("#logout").css('display', 'inline');
             },
@@ -48,10 +49,25 @@ $(document).ready(function () {
                 leiras: leiras,
                 fizetes: fizetes
             },
-            success: function(valasz){
+            success: function (valasz) {
                 console.log("Sikeres feltöltés.");
                 console.log(valasz);
             }
+        });
+    });//álláa feltöltés vége
+
+    //állások lekérdezése
+    $('.search').on('submit', function (e) {
+        e.preventDefault(); //alapértelmezett működést akadályozza meg
+    });
+    
+    $("[name=search]").click(function () {
+        console.log("Működik?");
+        let kulcsszo = $("#keyword").val();
+        kulcsszo = kulcsszo.trim();
+
+        $.get("php/search.php", {keyword: kulcsszo}, function (valasz) {
+            $("#jobs").html(valasz);
         });
     });//álláa feltöltés vége
 });

@@ -1,7 +1,7 @@
 <?php
 
 require_once '../config/init.php';
-is_logged(); //be van-e jelentkezve
+//is_logged(); //be van-e jelentkezve
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['katid'])) {
     $katid = $_POST['katid'];
