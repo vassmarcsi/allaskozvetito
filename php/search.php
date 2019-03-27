@@ -3,13 +3,29 @@
 require_once '../config/init.php';
 
 $keyword;
-if (!isset($_GET['keyword'])) {
-    $keyword = "%";
+$cat = "";
+
+if (isset($_GET['categorie'])) {
+    if (!isset($_GET['keyword'])) {
+        $keyword = "%";
+    } else {
+        $keyword = "%" . $_GET['keyword'] . "%";
+    }
+    $cat = " AND kategoria_id=".$_GET['categorie'];
 } else {
-    $keyword = "%" . $_GET['keyword'] . "%";
+    if (!isset($_GET['keyword'])) {
+        $keyword = "%";
+        $cat = "";
+    }
+    else
+    {
+            $keyword = "%" . $_GET['keyword'] . "%";
+    }
 }
 
-$sql = 'SELECT munkakor, fizetes, leiras, hely, munkaado FROM allasok WHERE munkakor LIKE ? OR leiras LIKE ? OR hely LIKE ? ;';
+
+
+$sql = 'SELECT munkakor, fizetes, leiras, hely, munkaado FROM allasok WHERE (munkakor LIKE ? OR leiras LIKE ? OR hely LIKE ?) '.$cat;
 //kategoria_id,munkaado,munkakor,leiras,fizetes,hely,kapcsolat_id
 $stmt = $conn->prepare($sql);
 

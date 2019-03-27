@@ -31,12 +31,16 @@ $(document).ready(function () {
 
     $("[name=feltolt]").click(function () {
         //katid, munkaado, munkakor, hely, leiras, fizetes
-        let katid = $("[name=katid]").val();
+        //
+        //let katid = $("[name=katid]").val();
+        let katid = $('input[name="katid"]:checked').val();
         let munkaado = $("[name=munkaado]").val();
         let munkakor = $("[name=munkakor]").val();
         let hely = $("[name=hely]").val();
         let leiras = $("[name=leiras]").val();
         let fizetes = $("[name=fizetes]").val();
+        
+        
 
         $.ajax({
             method: "POST",
@@ -60,14 +64,33 @@ $(document).ready(function () {
     $('.search').on('submit', function (e) {
         e.preventDefault(); //alapértelmezett működést akadályozza meg
     });
-    
+
     $("[name=search]").click(function () {
         //console.log("Működik?");
         let kulcsszo = $("#keyword").val();
         kulcsszo = kulcsszo.trim();
+        let kat = $("#kategoria").val();
+        if (kat == 0)
+        {
+            $.get("php/search.php", {keyword: kulcsszo}, function (valasz) {
+                $("#jobs").html(valasz);
+            });
+        } else
+        {
+            $.get("php/search.php", {keyword: kulcsszo, categorie: kat}, function (valasz) {
+                $("#jobs").html(valasz);
+            });
+        }
 
-        $.get("php/search.php", {keyword: kulcsszo}, function (valasz) {
-            $("#jobs").html(valasz);
-        });
     });//álláa feltöltés vége
+
+    //betöltéskor minden állást betölt
+    $.get("php/search.php", {keyword: ""}, function (valasz) {
+        $("#jobs").html(valasz);
+    });
+
+    //betöltődéskor a felhasznált kategóriák megjelenítése
+    $.get("php/kategoria.php", {}, function (valasz) {
+        $("#kategoria").html(valasz);
+    });
 });
